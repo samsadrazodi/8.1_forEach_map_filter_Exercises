@@ -63,6 +63,10 @@ Examples:
 
 */
 function addKeyAndValue(arr, key, value) {
+    arr.forEach(function (val) {
+        return val[key] = value;
+    });
+    return arr;
 
 }
 /*
@@ -77,8 +81,22 @@ Examples:
 */
 function vowelCount(str) {
 
+    let split = str.split("");  // Split the characters of the array
+    const vowels = "aeiou";     // define the vowels
+    let newArray = {};          // initiate a new object
 
+    split.forEach(function (ch) {
+        let lowerCased = ch.toLowerCase();        // change to lowercase to make case insensitive
 
+        if (vowels.indexOf(lowerCased) !== -1) { //returns boolean (true/false)
+            if (newArray[lowerCased]) {          // if true: add count
+                newArray[lowerCased]++;
+            } else {                             //else(false): stay at 1
+                newArray[lowerCased] = 1;
+            }
+        }
+    });
+    return newArray;
 }
 
 /*
@@ -90,6 +108,11 @@ Examples:
 */
 
 function doubleValuesWithMap(arr) {
+    let newArray = [];
+    arr.map(function (val) {
+        newArray.push(val * 2);
+    });
+    return newArray;
 
 }
 
@@ -102,7 +125,11 @@ Examples:
 */
 
 function valTimesIndex(arr) {
-
+    let newArray = [];
+    arr.forEach(function (val, index) {
+        newArray.push(val * index);
+    });
+    return newArray;
 }
 
 /*
@@ -113,7 +140,11 @@ Examples:
 */
 
 function extractKey(arr, key) {
-
+    let newArray = [];
+    arr.forEach(function (val) {
+        newArray.push(val[key]);
+    });
+    return newArray;
 }
 
 /*
@@ -124,7 +155,11 @@ Examples:
 */
 
 function extractFullName(arr) {
-
+    let newArray = [];
+    arr.forEach(function (val) {
+        newArray.push(`${val['first']} ${val['last']}`)
+    })
+    return newArray;
 
 }
 
@@ -136,7 +171,9 @@ Examples:
 */
 
 function filterByValue(arr, key) {
-
+    return arr.filter(function (val) {
+        return val[key];
+    });
 }
 
 /*
@@ -148,6 +185,11 @@ Examples:
 */
 
 function find(arr, searchValue) {
+    return arr.filter(function (val) {
+        if (val === searchValue) {
+            return val;
+        };
+    })[0];
 
 }
 
@@ -159,6 +201,11 @@ Examples:
 */
 
 function findInObj(arr, key, searchValue) {
+    return arr.filter(function (val) {
+        if (val[key] === searchValue) {
+            return val;
+        }
+    })[0];
 
 };
 
@@ -173,10 +220,17 @@ Examples:
 */
 
 function removeVowels(str) {
+    const vowels = "aeiou";
+    let lowerCased = str.toLowerCase();
+    let splitLetters = lowerCased.split("");
+    let newString = "";
+    splitLetters.forEach(function (letter) {
 
-
-
-
+        if (vowels.indexOf(letter) === -1) {
+            newString += `${letter}`;
+        }
+    });
+    return newString;
 }
 
 /*
@@ -189,4 +243,13 @@ Examples:
 
 function doubleOddNumbers(arr) {
 
+    return arr
+        .filter(function (val) {
+            if (val % 2 !== 0) {
+                return val
+            }
+        })
+        .map(function (val) {
+            return val * 2;
+        });
 }
